@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Policy — Apollo AI Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080800;--bg2:#0f0f02;--bg3:#161600;
+  --surface:rgba(251,191,36,0.04);--surface2:rgba(251,191,36,0.07);
+  --border:rgba(251,191,36,0.1);--border2:rgba(251,191,36,0.2);
+  --gold:#f59e0b;--gold2:#fbbf24;--gold3:#ffe066;--gold4:#fef3c7;
+  --green:#22c55e;--red:#ef4444;
+  --text:#fef3c7;--text2:#a8956a;--text3:#5a4a2a;
+  --r:16px;--r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::before{content:"";position:fixed;top:-30%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(251,191,36,0.05) 0%,transparent 65%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(180,83,9,0.04) 0%,transparent 65%);pointer-events:none;z-index:0}
+a{color:inherit;text-decoration:none}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(8,8,0,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Syne,sans-serif;font-weight:800;font-size:16px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-icon{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b45309);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;-webkit-text-fill-color:#080800}
+.topbar-link{font-size:13px;color:var(--text2);padding:7px 14px;border-radius:100px;border:1px solid var(--border);transition:all .2s}
+.topbar-link:hover{color:var(--gold2);border-color:var(--border2);background:var(--surface)}
+
+.shell{display:flex;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.sidenav{width:230px;flex-shrink:0;padding:40px 16px 60px;position:sticky;top:69px;height:calc(100vh - 69px);overflow-y:auto}
+.sidenav-label{font-family:"Space Mono",monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 8px}
+.sidenav a{display:block;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--text2);font-weight:500;margin-bottom:2px;transition:all .15s;border-left:2px solid transparent}
+.sidenav a:hover{background:var(--surface);color:var(--gold2)}
+.sidenav a.active{background:rgba(251,191,36,0.1);color:var(--gold2);border-left-color:var(--gold);font-weight:700}
+main{flex:1;padding:48px 40px 100px;min-width:0;max-width:780px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-family:"Space Mono",monospace;font-size:11px;color:var(--gold2);letter-spacing:.5px;margin-bottom:18px}
+h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;background:linear-gradient(135deg,var(--gold4),var(--gold),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.lede{font-size:16px;color:var(--text2);max-width:620px;margin-bottom:8px;line-height:1.7}
+.updated{font-family:"Space Mono",monospace;font-size:11px;color:var(--text3);margin-bottom:36px}
+
+h2{font-family:Syne,sans-serif;font-weight:700;font-size:20px;color:var(--gold3);margin:36px 0 14px}
+h2:first-of-type{margin-top:0}
+p{font-size:14px;color:var(--text2);margin-bottom:14px;max-width:680px}
+
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 24px}
+.dd-card{border-radius:var(--r-sm);padding:18px 20px}
+.dd-do{background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.18)}
+.dd-dont{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18)}
+.dd-title{font-weight:700;font-size:13px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.dd-do .dd-title{color:var(--green)}
+.dd-dont .dd-title{color:#f87171}
+.dd-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.dd-card li{font-size:13px;line-height:1.5;color:var(--text2);display:flex;gap:8px}
+.dd-do li::before{content:"✓";color:var(--green);flex-shrink:0;font-weight:700}
+.dd-dont li::before{content:"✕";color:#f87171;flex-shrink:0;font-weight:700}
+
+.num-list{display:flex;flex-direction:column;gap:10px;margin:16px 0;max-width:680px}
+.num-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px}
+.num-badge{width:24px;height:24px;border-radius:50%;background:rgba(251,191,36,0.12);border:1px solid var(--border2);color:var(--gold2);font-family:"Space Mono",monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.num-text{font-size:13px;color:var(--text2);line-height:1.6}
+.num-text strong{color:var(--gold4)}
+
+.callout{background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:var(--r-sm);padding:18px 20px;margin:20px 0;max-width:680px}
+.callout-title{font-weight:700;font-size:13px;color:var(--gold2);margin-bottom:6px}
+
+footer{border-top:1px solid var(--border);padding:30px 40px;text-align:center;font-size:12px;color:var(--text3);font-family:"Space Mono",monospace}
+
+@media(max-width:768px){
+  .sidenav{display:none}
+  main{padding:32px 20px 80px}
+  .do-dont{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="docs.html" class="brand"><span class="brand-icon">✦</span> Apollo AI Studio</a>
+  <a href="https://apollo-ai-ochre.vercel.app" class="topbar-link">Buka App →</a>
+</div>
+
+<div class="shell">
+  <nav class="sidenav">
+    <div class="sidenav-label">Dokumentasi</div>
+    <a href="docs.html">Docs</a>
+    <a href="faq.html">FAQ</a>
+    <a href="model-card.html">Model Card</a>
+    <div class="sidenav-label" style="margin-top:20px">Legal & Kebijakan</div>
+    <a href="ai-policy.html" class="active">AI Policy</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+  </nav>
+
+  <main>
+    <span class="eyebrow">🛡️ Kebijakan Penggunaan AI</span>
+    <h1>AI Policy</h1>
+    <p class="lede">Panduan tentang penggunaan Apollo AI yang aman, etis, dan bertanggung jawab — untuk pengguna maupun untuk cara kami merancang sistemnya.</p>
+    <div class="updated">Berlaku efektif: 2026 · Versi 1.0</div>
+
+    <h2>1. Prinsip Dasar</h2>
+    <p>Apollo AI dirancang untuk membantu, bukan menggantikan, penilaian manusia. Kami berkomitmen membangun AI yang bermanfaat, jujur, dan tidak merugikan penggunanya maupun pihak lain. Kebijakan ini berlaku untuk semua interaksi dengan Apollo AI, baik chat pribadi maupun Global Chat.</p>
+
+    <h2>2. Penggunaan yang Diperbolehkan dan Dilarang</h2>
+    <div class="do-dont">
+      <div class="dd-card dd-do">
+        <div class="dd-title">✓ Diperbolehkan</div>
+        <ul>
+          <li>Belajar, riset, dan bantuan tugas akademik</li>
+          <li>Menulis, brainstorming, dan konten kreatif</li>
+          <li>Bantuan coding dan debugging</li>
+          <li>Percakapan santai dan hiburan wajar</li>
+          <li>Analisis dokumen dan gambar milik sendiri</li>
+        </ul>
+      </div>
+      <div class="dd-card dd-dont">
+        <div class="dd-title">✕ Dilarang</div>
+        <ul>
+          <li>Membuat konten ilegal, kekerasan, atau kebencian</li>
+          <li>Menghasilkan informasi untuk membahayakan orang lain</li>
+          <li>Konten seksual yang melibatkan atau ditujukan pada anak di bawah umur</li>
+          <li>Penipuan, phishing, atau manipulasi identitas</li>
+          <li>Menyalahgunakan AI untuk spam atau serangan ke sistem lain</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>3. Batasan Tanggung Jawab AI</h2>
+    <div class="num-list">
+      <div class="num-item">
+        <span class="num-badge">1</span>
+        <span class="num-text">Apollo AI <strong>bukan pengganti</strong> tenaga profesional di bidang medis, hukum, psikologis, atau finansial. Jawaban AI bersifat informatif, bukan nasihat resmi.</span>
+      </div>
+      <div class="num-item">
+        <span class="num-badge">2</span>
+        <span class="num-text">Pengguna bertanggung jawab penuh atas keputusan yang dibuat berdasarkan jawaban Apollo AI. Selalu verifikasi informasi penting secara independen.</span>
+      </div>
+      <div class="num-item">
+        <span class="num-badge">3</span>
+        <span class="num-text">Apollo AI dapat membuat kesalahan ("halusinasi") — lihat <a href="model-card.html" style="color:var(--gold2);text-decoration:underline">Model Card</a> untuk detail keterbatasan model.</span>
+      </div>
+    </div>
+
+    <h2>4. Konten yang Dihasilkan AI</h2>
+    <p>Pengguna bertanggung jawab atas bagaimana mereka menggunakan konten yang dihasilkan Apollo AI, termasuk untuk keperluan akademik (skripsi, esai) maupun profesional. Kami menyarankan pengguna untuk selalu menyatakan secara jujur jika suatu karya dibantu AI, sesuai aturan institusi masing-masing.</p>
+
+    <h2>5. Moderasi & Penegakan</h2>
+    <p>Apollo AI memiliki sistem monitor otomatis dan manual untuk mendeteksi penyalahgunaan, baik dalam percakapan dengan AI maupun di Global Chat. Pelanggaran terhadap kebijakan ini dapat mengakibatkan peringatan, pembatasan fitur, atau pemblokiran akun secara permanen, sesuai dengan <a href="terms-of-service.html" style="color:var(--gold2);text-decoration:underline">Terms of Service</a>.</p>
+
+    <h2>6. Anak di Bawah Umur</h2>
+    <p>Apollo AI menerapkan kebijakan ketat terhadap segala bentuk konten yang membahayakan, mengeksploitasi, atau tidak pantas terhadap anak di bawah umur, tanpa pengecualian. Permintaan semacam ini akan ditolak secara otomatis oleh sistem.</p>
+
+    <div class="callout">
+      <div class="callout-title">📩 Laporkan Penyalahgunaan</div>
+      <p style="margin:0">Jika kamu menemukan konten atau perilaku pengguna lain yang melanggar kebijakan ini di Global Chat, gunakan fitur Lapor (Report) yang tersedia, atau hubungi tim kami lewat Live Chat.</p>
+    </div>
+  </main>
+</div>
+
+<footer>© 2026 Apollo AI Studio — Made in Indonesia 🇮🇩 · v3.8.6.2</footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Card — Apollo AI Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080800;--bg2:#0f0f02;--bg3:#161600;
+  --surface:rgba(251,191,36,0.04);--surface2:rgba(251,191,36,0.07);
+  --border:rgba(251,191,36,0.1);--border2:rgba(251,191,36,0.2);
+  --gold:#f59e0b;--gold2:#fbbf24;--gold3:#ffe066;--gold4:#fef3c7;
+  --green:#22c55e;--red:#ef4444;
+  --text:#fef3c7;--text2:#a8956a;--text3:#5a4a2a;
+  --r:16px;--r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::before{content:"";position:fixed;top:-30%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(251,191,36,0.05) 0%,transparent 65%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(180,83,9,0.04) 0%,transparent 65%);pointer-events:none;z-index:0}
+a{color:inherit;text-decoration:none}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(8,8,0,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Syne,sans-serif;font-weight:800;font-size:16px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-icon{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b45309);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;-webkit-text-fill-color:#080800}
+.topbar-link{font-size:13px;color:var(--text2);padding:7px 14px;border-radius:100px;border:1px solid var(--border);transition:all .2s}
+.topbar-link:hover{color:var(--gold2);border-color:var(--border2);background:var(--surface)}
+
+.shell{display:flex;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.sidenav{width:230px;flex-shrink:0;padding:40px 16px 60px;position:sticky;top:69px;height:calc(100vh - 69px);overflow-y:auto}
+.sidenav-label{font-family:"Space Mono",monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 8px}
+.sidenav a{display:block;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--text2);font-weight:500;margin-bottom:2px;transition:all .15s;border-left:2px solid transparent}
+.sidenav a:hover{background:var(--surface);color:var(--gold2)}
+.sidenav a.active{background:rgba(251,191,36,0.1);color:var(--gold2);border-left-color:var(--gold);font-weight:700}
+main{flex:1;padding:48px 40px 100px;min-width:0;max-width:780px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-family:"Space Mono",monospace;font-size:11px;color:var(--gold2);letter-spacing:.5px;margin-bottom:18px}
+h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;background:linear-gradient(135deg,var(--gold4),var(--gold),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.lede{font-size:16px;color:var(--text2);max-width:620px;margin-bottom:36px;line-height:1.7}
+
+h2{font-family:Syne,sans-serif;font-weight:700;font-size:20px;color:var(--gold3);margin:36px 0 14px}
+h2:first-of-type{margin-top:0}
+p{font-size:14px;color:var(--text2);margin-bottom:14px;max-width:680px}
+ul.flist{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+ul.flist li{display:flex;gap:8px;font-size:13.5px;color:var(--text2);line-height:1.6}
+ul.flist li::before{content:"—";color:var(--gold2);flex-shrink:0}
+
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.spec-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px}
+.spec-label{font-family:"Space Mono",monospace;font-size:10px;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.spec-val{font-family:Syne,sans-serif;font-weight:700;font-size:16px;color:var(--gold3)}
+
+.cap-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.cap-table th{text-align:left;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--border2);color:var(--text3);font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase}
+.cap-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+.cap-table tr:last-child td{border-bottom:none}
+.tag-ok{display:inline-flex;align-items:center;gap:4px;color:var(--green);font-weight:600;font-size:12.5px}
+.tag-limited{display:inline-flex;align-items:center;gap:4px;color:var(--gold2);font-weight:600;font-size:12.5px}
+.tag-no{display:inline-flex;align-items:center;gap:4px;color:#f87171;font-weight:600;font-size:12.5px}
+
+.warn-box{background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:var(--r-sm);padding:18px 20px;margin:20px 0;max-width:680px}
+.warn-title{font-weight:700;font-size:13px;color:#f87171;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.warn-box ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.warn-box li{display:flex;gap:8px;font-size:13px;color:#fca5a5;line-height:1.5}
+.warn-box li::before{content:"⚠";flex-shrink:0;color:#f87171}
+
+footer{border-top:1px solid var(--border);padding:30px 40px;text-align:center;font-size:12px;color:var(--text3);font-family:"Space Mono",monospace}
+
+@media(max-width:768px){
+  .sidenav{display:none}
+  main{padding:32px 20px 80px}
+  .spec-grid{grid-template-columns:1fr 1fr}
+  .cap-table{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="docs.html" class="brand"><span class="brand-icon">✦</span> Apollo AI Studio</a>
+  <a href="https://apollo-ai-ochre.vercel.app" class="topbar-link">Buka App →</a>
+</div>
+
+<div class="shell">
+  <nav class="sidenav">
+    <div class="sidenav-label">Dokumentasi</div>
+    <a href="docs.html">Docs</a>
+    <a href="faq.html">FAQ</a>
+    <a href="model-card.html" class="active">Model Card</a>
+    <div class="sidenav-label" style="margin-top:20px">Legal & Kebijakan</div>
+    <a href="ai-policy.html">AI Policy</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+  </nav>
+
+  <main>
+    <span class="eyebrow">🧠 Model Card</span>
+    <h1>Tentang Model Apollo AI</h1>
+    <p class="lede">Transparansi soal model AI yang menggerakkan Apollo AI — kemampuannya, keterbatasannya, dan bagaimana sebaiknya kamu menggunakannya.</p>
+
+    <div class="spec-grid">
+      <div class="spec-card"><div class="spec-label">Model Dasar</div><div class="spec-val">Llama (Meta)</div></div>
+      <div class="spec-card"><div class="spec-label">Infrastruktur</div><div class="spec-val">Groq Cloud (LPU)</div></div>
+      <div class="spec-card"><div class="spec-label">Versi Apollo</div><div class="spec-val">v3.8.6.2</div></div>
+    </div>
+
+    <h2>Ringkasan</h2>
+    <p>Apollo AI menggunakan model bahasa Llama dari Meta, dijalankan melalui infrastruktur Groq Cloud yang memanfaatkan chip LPU (Language Processing Unit) untuk inferensi berkecepatan tinggi. Kombinasi ini memungkinkan Apollo AI memberikan respons yang sangat cepat dibanding banyak layanan AI lain, tanpa mengorbankan kualitas jawaban.</p>
+    <p>Model ini di-fine-tune dan dikonfigurasi ulang oleh Tim Apollo AI melalui sistem prompt khusus untuk setiap mode (Skripsi, Coding, Ujian, Kreatif, Santai, dan lainnya), agar gaya dan fokus jawabannya sesuai konteks penggunaan di Indonesia.</p>
+
+    <h2>Kemampuan</h2>
+    <ul class="flist">
+      <li>Memahami dan merespons dalam Bahasa Indonesia secara natural, termasuk bahasa gaul dan istilah lokal</li>
+      <li>Membantu penulisan akademik (skripsi, esai, makalah) dengan struktur dan referensi yang masuk akal</li>
+      <li>Menulis, menjelaskan, dan men-debug kode dalam berbagai bahasa pemrograman</li>
+      <li>Menganalisis gambar yang dikirim (Vision AI) — mengenali objek, teks dalam gambar, dan konteks visual</li>
+      <li>Membaca dan menjawab pertanyaan dari dokumen PDF yang diunggah</li>
+      <li>Menyesuaikan gaya jawaban sesuai mode yang dipilih pengguna</li>
+    </ul>
+
+    <h2>Tabel Kapabilitas</h2>
+    <table class="cap-table">
+      <tr><th>Kemampuan</th><th>Status</th></tr>
+      <tr><td>Percakapan umum (Bahasa Indonesia)</td><td><span class="tag-ok">✓ Baik</span></td></tr>
+      <tr><td>Coding & debugging</td><td><span class="tag-ok">✓ Baik</span></td></tr>
+      <tr><td>Analisis gambar (Vision)</td><td><span class="tag-ok">✓ Baik</span></td></tr>
+      <tr><td>Analisis dokumen PDF</td><td><span class="tag-ok">✓ Baik</span></td></tr>
+      <tr><td>Matematika & perhitungan kompleks</td><td><span class="tag-limited">~ Terbatas</span></td></tr>
+      <tr><td>Informasi real-time / terkini</td><td><span class="tag-limited">~ Terbatas</span></td></tr>
+      <tr><td>Nasihat medis, hukum, atau finansial spesifik</td><td><span class="tag-limited">~ Terbatas, bukan pengganti profesional</span></td></tr>
+      <tr><td>Menghasilkan gambar atau video</td><td><span class="tag-no">✕ Tidak tersedia</span></td></tr>
+    </table>
+
+    <h2>Keterbatasan</h2>
+    <p>Seperti model bahasa AI pada umumnya, Apollo AI memiliki keterbatasan yang penting untuk dipahami sebelum digunakan untuk hal-hal penting:</p>
+    <div class="warn-box">
+      <div class="warn-title">⚠️ Yang perlu kamu ketahui</div>
+      <ul>
+        <li>Apollo AI bisa menghasilkan jawaban yang terdengar yakin namun salah ("halusinasi") — selalu verifikasi informasi penting</li>
+        <li>Pengetahuan model memiliki batas waktu tertentu dan tidak otomatis mengetahui peristiwa yang sangat baru</li>
+        <li>Bukan pengganti konsultasi profesional untuk masalah medis, hukum, psikologis, atau finansial</li>
+        <li>Kemampuan matematika kompleks dan penalaran multi-langkah masih bisa keliru pada kasus tertentu</li>
+        <li>Performa terbaik dalam Bahasa Indonesia dan Inggris; bahasa daerah/lokal mungkin kurang akurat</li>
+      </ul>
+    </div>
+
+    <h2>Penggunaan yang Direkomendasikan</h2>
+    <p>Gunakan Apollo AI sebagai alat bantu berpikir, belajar, dan produktivitas — bukan sumber kebenaran absolut. Untuk keputusan penting (medis, hukum, finansial), selalu konsultasikan dengan profesional yang berwenang. Lihat <a href="ai-policy.html" style="color:var(--gold2);text-decoration:underline">AI Policy</a> kami untuk panduan penggunaan yang bertanggung jawab.</p>
+  </main>
+</div>
+
+<footer>© 2026 Apollo AI Studio — Made in Indonesia 🇮🇩 · v3.8.6.2</footer>
+</body>
+</html>

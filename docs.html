@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi — Apollo AI Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080800;--bg2:#0f0f02;--bg3:#161600;
+  --surface:rgba(251,191,36,0.04);--surface2:rgba(251,191,36,0.07);
+  --border:rgba(251,191,36,0.1);--border2:rgba(251,191,36,0.2);
+  --gold:#f59e0b;--gold2:#fbbf24;--gold3:#ffe066;--gold4:#fef3c7;
+  --text:#fef3c7;--text2:#a8956a;--text3:#5a4a2a;
+  --r:16px;--r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::before{content:"";position:fixed;top:-30%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(251,191,36,0.05) 0%,transparent 65%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(180,83,9,0.04) 0%,transparent 65%);pointer-events:none;z-index:0}
+a{color:inherit;text-decoration:none}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(8,8,0,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Syne,sans-serif;font-weight:800;font-size:16px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-icon{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b45309);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;-webkit-text-fill-color:#080800}
+.topbar-link{font-size:13px;color:var(--text2);padding:7px 14px;border-radius:100px;border:1px solid var(--border);transition:all .2s}
+.topbar-link:hover{color:var(--gold2);border-color:var(--border2);background:var(--surface)}
+
+/* LAYOUT */
+.shell{display:flex;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.sidenav{width:230px;flex-shrink:0;padding:40px 16px 60px;position:sticky;top:69px;height:calc(100vh - 69px);overflow-y:auto}
+.sidenav-label{font-family:"Space Mono",monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 8px}
+.sidenav a{display:block;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--text2);font-weight:500;margin-bottom:2px;transition:all .15s;border-left:2px solid transparent}
+.sidenav a:hover{background:var(--surface);color:var(--gold2)}
+.sidenav a.active{background:rgba(251,191,36,0.1);color:var(--gold2);border-left-color:var(--gold);font-weight:700}
+main{flex:1;padding:48px 40px 100px;min-width:0}
+
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-family:"Space Mono",monospace;font-size:11px;color:var(--gold2);letter-spacing:.5px;margin-bottom:18px}
+h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;background:linear-gradient(135deg,var(--gold4),var(--gold),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.lede{font-size:16px;color:var(--text2);max-width:620px;margin-bottom:40px;line-height:1.7}
+
+.card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:48px}
+.doc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px;transition:all .2s;display:block}
+.doc-card:hover{border-color:var(--border2);background:var(--surface2);transform:translateY(-2px)}
+.doc-card-icon{font-size:24px;margin-bottom:10px;display:block}
+.doc-card-title{font-family:Syne,sans-serif;font-weight:700;font-size:15px;color:var(--gold4);margin-bottom:5px}
+.doc-card-desc{font-size:13px;color:var(--text3);line-height:1.5}
+
+h2{font-family:Syne,sans-serif;font-weight:700;font-size:22px;color:var(--gold3);margin:40px 0 14px;padding-top:8px}
+h2:first-of-type{margin-top:0}
+p{font-size:14px;color:var(--text2);margin-bottom:14px;max-width:680px}
+.callout{background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:var(--r-sm);padding:18px 20px;margin:20px 0;max-width:680px}
+.callout-title{font-weight:700;font-size:13px;color:var(--gold2);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.step-list{display:flex;flex-direction:column;gap:10px;max-width:680px;margin-bottom:20px}
+.step{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(251,191,36,0.12);border:1px solid var(--border2);color:var(--gold2);font-family:"Space Mono",monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-text{font-size:13px;color:var(--text2);line-height:1.6}
+.step-text strong{color:var(--gold4)}
+code{font-family:"Space Mono",monospace;font-size:12.5px;background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:5px;color:var(--gold3)}
+
+footer{border-top:1px solid var(--border);padding:30px 40px;text-align:center;font-size:12px;color:var(--text3);font-family:"Space Mono",monospace}
+
+@media(max-width:768px){
+  .sidenav{display:none}
+  main{padding:32px 20px 80px}
+  .card-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="docs.html" class="brand"><span class="brand-icon">✦</span> Apollo AI Studio</a>
+  <a href="https://apollo-ai-ochre.vercel.app" class="topbar-link">Buka App →</a>
+</div>
+
+<div class="shell">
+  <nav class="sidenav">
+    <div class="sidenav-label">Dokumentasi</div>
+    <a href="docs.html" class="active">Docs</a>
+    <a href="faq.html">FAQ</a>
+    <a href="model-card.html">Model Card</a>
+    <div class="sidenav-label" style="margin-top:20px">Legal & Kebijakan</div>
+    <a href="ai-policy.html">AI Policy</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+  </nav>
+
+  <main>
+    <span class="eyebrow">📖 Dokumentasi Resmi</span>
+    <h1>Panduan Apollo AI Studio</h1>
+    <p class="lede">Semua yang perlu kamu tahu untuk mulai menggunakan Apollo AI — dari cara chat pertama kali, mode-mode yang tersedia, sampai cara kerja di balik layar.</p>
+
+    <div class="card-grid">
+      <a href="faq.html" class="doc-card">
+        <span class="doc-card-icon">❓</span>
+        <div class="doc-card-title">FAQ</div>
+        <div class="doc-card-desc">Pertanyaan yang paling sering ditanyakan pengguna Apollo AI</div>
+      </a>
+      <a href="model-card.html" class="doc-card">
+        <span class="doc-card-icon">🧠</span>
+        <div class="doc-card-title">Model Card</div>
+        <div class="doc-card-desc">Model AI yang digunakan, kemampuan, dan batasannya</div>
+      </a>
+      <a href="ai-policy.html" class="doc-card">
+        <span class="doc-card-icon">🛡️</span>
+        <div class="doc-card-title">AI Policy</div>
+        <div class="doc-card-desc">Aturan penggunaan AI yang bertanggung jawab di Apollo AI</div>
+      </a>
+      <a href="privacy-policy.html" class="doc-card">
+        <span class="doc-card-icon">🔒</span>
+        <div class="doc-card-title">Privacy Policy</div>
+        <div class="doc-card-desc">Bagaimana data kamu disimpan, digunakan, dan dilindungi</div>
+      </a>
+      <a href="terms-of-service.html" class="doc-card">
+        <span class="doc-card-icon">📜</span>
+        <div class="doc-card-title">Terms of Service</div>
+        <div class="doc-card-desc">Syarat dan ketentuan menggunakan layanan Apollo AI</div>
+      </a>
+      <a href="https://apollo-ai-ochre.vercel.app" class="doc-card">
+        <span class="doc-card-icon">🚀</span>
+        <div class="doc-card-title">Mulai Chat</div>
+        <div class="doc-card-desc">Langsung buka Apollo AI dan mulai ngobrol sekarang</div>
+      </a>
+    </div>
+
+    <h2>Apa itu Apollo AI?</h2>
+    <p>Apollo AI Studio adalah platform AI pertama dari Indonesia yang dilengkapi fitur Global Chat — ruang ngobrol real-time antar pengguna. Dibangun dari nol oleh Tim Apollo AI (Iky, Lana, Deii), Apollo AI hadir dengan 14+ mode AI spesialis untuk berbagai kebutuhan: dari menulis skripsi, coding, sampai sekadar ngobrol santai.</p>
+    <p>Apollo AI tersedia gratis dan bisa diinstall sebagai aplikasi (PWA) langsung dari browser, tanpa perlu Play Store.</p>
+
+    <h2>Mulai dalam 3 langkah</h2>
+    <div class="step-list">
+      <div class="step">
+        <span class="step-num">1</span>
+        <span class="step-text">Buka <strong>apollo-ai-ochre.vercel.app</strong> di browser HP atau laptop kamu. Tidak perlu install dulu untuk mencoba.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <span class="step-text">Daftar akun gratis dengan email, atau langsung masuk pakai Google. Akun diperlukan untuk menyimpan riwayat chat dan akses Global Chat.</span>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-text">Pilih mode AI yang sesuai kebutuhanmu (atau biarkan default), lalu mulai ngobrol. Bisa kirim teks, foto, atau file PDF.</span>
+      </div>
+    </div>
+
+    <h2>Mode AI yang tersedia</h2>
+    <p>Apollo AI punya 14+ mode spesialis, antara lain: <code>Mode Skripsi</code> untuk bantuan akademik, <code>Mode Coding</code> untuk menulis dan debug kode, <code>Mode Ujian</code> untuk latihan soal, <code>Mode Kreatif</code> untuk cerita dan konten, <code>Mode Santai</code> untuk ngobrol bebas, dan beberapa mode lain seperti hukum dan bisnis. Setiap mode menyesuaikan gaya jawaban Apollo AI agar lebih relevan dengan topik yang kamu bahas.</p>
+
+    <h2>Fitur lainnya</h2>
+    <p>Selain chat satu-ke-satu dengan AI, Apollo AI juga punya <strong style="color:var(--gold4)">Global Chat</strong> — ruang ngobrol real-time dengan semua pengguna lain, <strong style="color:var(--gold4)">PDF Analyzer</strong> untuk upload dan tanya jawab soal isi dokumen, <strong style="color:var(--gold4)">Vision AI</strong> untuk menganalisis foto yang kamu kirim, serta <strong style="color:var(--gold4)">Live Chat</strong> untuk menghubungi admin secara langsung jika ada masalah.</p>
+
+    <div class="callout">
+      <div class="callout-title">💡 Butuh bantuan lebih lanjut?</div>
+      <p style="margin:0">Cek halaman <a href="faq.html" style="color:var(--gold2);text-decoration:underline">FAQ</a> untuk pertanyaan umum, atau hubungi tim kami lewat fitur Live Chat di dalam aplikasi.</p>
+    </div>
+  </main>
+</div>
+
+<footer>© 2026 Apollo AI Studio — Made in Indonesia 🇮🇩 · v3.8.6.2</footer>
+</body>
+</html>

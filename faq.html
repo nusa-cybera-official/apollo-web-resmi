@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Apollo AI Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080800;--bg2:#0f0f02;--bg3:#161600;
+  --surface:rgba(251,191,36,0.04);--surface2:rgba(251,191,36,0.07);
+  --border:rgba(251,191,36,0.1);--border2:rgba(251,191,36,0.2);
+  --gold:#f59e0b;--gold2:#fbbf24;--gold3:#ffe066;--gold4:#fef3c7;
+  --text:#fef3c7;--text2:#a8956a;--text3:#5a4a2a;
+  --r:16px;--r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::before{content:"";position:fixed;top:-30%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(251,191,36,0.05) 0%,transparent 65%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(180,83,9,0.04) 0%,transparent 65%);pointer-events:none;z-index:0}
+a{color:inherit;text-decoration:none}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(8,8,0,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Syne,sans-serif;font-weight:800;font-size:16px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-icon{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b45309);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;-webkit-text-fill-color:#080800}
+.topbar-link{font-size:13px;color:var(--text2);padding:7px 14px;border-radius:100px;border:1px solid var(--border);transition:all .2s}
+.topbar-link:hover{color:var(--gold2);border-color:var(--border2);background:var(--surface)}
+
+.shell{display:flex;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.sidenav{width:230px;flex-shrink:0;padding:40px 16px 60px;position:sticky;top:69px;height:calc(100vh - 69px);overflow-y:auto}
+.sidenav-label{font-family:"Space Mono",monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 8px}
+.sidenav a{display:block;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--text2);font-weight:500;margin-bottom:2px;transition:all .15s;border-left:2px solid transparent}
+.sidenav a:hover{background:var(--surface);color:var(--gold2)}
+.sidenav a.active{background:rgba(251,191,36,0.1);color:var(--gold2);border-left-color:var(--gold);font-weight:700}
+main{flex:1;padding:48px 40px 100px;min-width:0;max-width:780px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-family:"Space Mono",monospace;font-size:11px;color:var(--gold2);letter-spacing:.5px;margin-bottom:18px}
+h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;background:linear-gradient(135deg,var(--gold4),var(--gold),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.lede{font-size:16px;color:var(--text2);max-width:620px;margin-bottom:36px;line-height:1.7}
+
+.fcat{font-family:"Space Mono",monospace;font-size:11px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin:36px 0 14px}
+.fcat:first-of-type{margin-top:0}
+
+.faq-item{border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:10px;overflow:hidden;background:var(--surface)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;cursor:pointer;font-weight:600;font-size:14.5px;color:var(--gold4);transition:background .2s}
+.faq-q:hover{background:var(--surface2)}
+.faq-arrow{flex-shrink:0;width:18px;height:18px;color:var(--text3);transition:transform .25s}
+.faq-item.open .faq-arrow{transform:rotate(45deg);color:var(--gold2)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a-inner{padding:0 18px 16px;font-size:13.5px;color:var(--text2);line-height:1.7}
+.faq-a-inner code{font-family:"Space Mono",monospace;background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:5px;color:var(--gold3)}
+
+footer{border-top:1px solid var(--border);padding:30px 40px;text-align:center;font-size:12px;color:var(--text3);font-family:"Space Mono",monospace}
+
+@media(max-width:768px){
+  .sidenav{display:none}
+  main{padding:32px 20px 80px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="docs.html" class="brand"><span class="brand-icon">✦</span> Apollo AI Studio</a>
+  <a href="https://apollo-ai-ochre.vercel.app" class="topbar-link">Buka App →</a>
+</div>
+
+<div class="shell">
+  <nav class="sidenav">
+    <div class="sidenav-label">Dokumentasi</div>
+    <a href="docs.html">Docs</a>
+    <a href="faq.html" class="active">FAQ</a>
+    <a href="model-card.html">Model Card</a>
+    <div class="sidenav-label" style="margin-top:20px">Legal & Kebijakan</div>
+    <a href="ai-policy.html">AI Policy</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+  </nav>
+
+  <main>
+    <span class="eyebrow">❓ Pertanyaan Umum</span>
+    <h1>FAQ</h1>
+    <p class="lede">Kumpulan pertanyaan yang paling sering ditanyakan pengguna Apollo AI. Tidak menemukan jawabanmu? Hubungi kami lewat Live Chat di dalam aplikasi.</p>
+
+    <div class="fcat">Umum</div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apa itu Apollo AI? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Apollo AI Studio adalah platform AI buatan Indonesia dengan fitur Global Chat — ruang ngobrol real-time antar pengguna. Apollo AI menyediakan 14+ mode AI spesialis untuk berbagai kebutuhan, mulai dari menulis skripsi, coding, sampai ngobrol santai.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apakah Apollo AI gratis? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Ya, Apollo AI sepenuhnya gratis digunakan. Tidak ada biaya berlangganan atau biaya tersembunyi untuk fitur-fitur yang tersedia saat ini.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Siapa yang membuat Apollo AI? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Apollo AI dibangun dari nol oleh Tim Apollo AI Indonesia — Iky, Lana, dan Deii. Apollo AI bukan tiruan dari produk AI lain; seluruh desain, kode, dan kontennya original.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apakah saya wajib membuat akun untuk menggunakan Apollo AI? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Untuk menyimpan riwayat chat, mengakses Global Chat, dan fitur lain yang dipersonalisasi, kamu perlu membuat akun gratis lewat email atau Google.</div></div>
+    </div>
+
+    <div class="fcat">Fitur & Penggunaan</div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apa saja mode AI yang tersedia? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Ada 14+ mode spesialis, termasuk <code>Mode Skripsi</code>, <code>Mode Coding</code>, <code>Mode Ujian</code>, <code>Mode Kreatif</code>, <code>Mode Santai</code>, dan mode lain seperti hukum dan bisnis. Setiap mode menyesuaikan gaya jawaban Apollo AI agar lebih relevan dengan topik yang kamu bahas.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apa itu Global Chat? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Global Chat adalah ruang ngobrol real-time tempat semua pengguna Apollo AI bisa berinteraksi satu sama lain, bukan dengan AI. Fitur ini dimoderasi dan dimonitor 24/7 untuk menjaga keamanan komunitas.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Bisakah Apollo AI menganalisis foto atau dokumen PDF? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Ya. Apollo AI punya fitur Vision AI untuk menganalisis foto yang kamu kirim, dan PDF Analyzer untuk upload dokumen lalu bertanya jawab seputar isinya.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Bisakah saya install Apollo AI sebagai aplikasi? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Ya, Apollo AI mendukung PWA (Progressive Web App). Kamu bisa menambahkannya ke homescreen HP langsung dari browser, tanpa perlu Play Store atau App Store.</div></div>
+    </div>
+
+    <div class="fcat">Akun & Keamanan</div>
+
+    <div class="faq-item">
+      <div class="faq-q">Bagaimana jika saya lupa password? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Gunakan fitur "Lupa Password" di halaman login. Kamu akan menerima tautan untuk membuat password baru lewat email yang terdaftar.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Bagaimana Apollo AI menjaga keamanan Global Chat? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Apollo AI memiliki sistem monitor dan log aktivitas 24/7, fitur lapor (report) untuk pesan yang melanggar aturan, serta sistem ban bagi akun yang melanggar Terms of Service.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apakah chat saya dengan AI bisa dilihat orang lain? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Tidak. Riwayat chat pribadi dengan AI hanya bisa diakses oleh akunmu sendiri. Yang bersifat publik hanya pesan yang kamu kirim di Global Chat. Detail lebih lanjut ada di <a href="privacy-policy.html" style="color:var(--gold2);text-decoration:underline">Privacy Policy</a>.</div></div>
+    </div>
+
+    <div class="fcat">Lainnya</div>
+
+    <div class="faq-item">
+      <div class="faq-q">Apollo AI kadang menjawab kurang akurat, apa wajar? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Wajar. Seperti model AI lainnya, Apollo AI bisa membuat kesalahan atau memberikan informasi yang kurang tepat, terutama untuk topik yang sangat spesifik atau terbaru. Selalu verifikasi informasi penting, terutama untuk keperluan medis, hukum, atau finansial. Lihat <a href="model-card.html" style="color:var(--gold2);text-decoration:underline">Model Card</a> untuk batasan lengkapnya.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Bagaimana cara melaporkan bug atau memberi masukan? <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      <div class="faq-a"><div class="faq-a-inner">Gunakan fitur Feedback di dalam aplikasi, atau hubungi Live Chat untuk masalah yang butuh respons cepat dari admin.</div></div>
+    </div>
+  </main>
+</div>
+
+<footer>© 2026 Apollo AI Studio — Made in Indonesia 🇮🇩 · v3.8.6.2</footer>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-q');
+  var a = item.querySelector('.faq-a');
+  q.addEventListener('click', function(){
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(other){
+      if(other !== item){ other.classList.remove('open'); other.querySelector('.faq-a').style.maxHeight = null; }
+    });
+    if(isOpen){ item.classList.remove('open'); a.style.maxHeight = null; }
+    else{ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+  });
+});
+</script>
+</body>
+</html>

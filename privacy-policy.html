@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Apollo AI Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080800;--bg2:#0f0f02;--bg3:#161600;
+  --surface:rgba(251,191,36,0.04);--surface2:rgba(251,191,36,0.07);
+  --border:rgba(251,191,36,0.1);--border2:rgba(251,191,36,0.2);
+  --gold:#f59e0b;--gold2:#fbbf24;--gold3:#ffe066;--gold4:#fef3c7;
+  --text:#fef3c7;--text2:#a8956a;--text3:#5a4a2a;
+  --r:16px;--r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::before{content:"";position:fixed;top:-30%;left:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(251,191,36,0.05) 0%,transparent 65%);pointer-events:none;z-index:0}
+body::after{content:"";position:fixed;bottom:-20%;right:-20%;width:60%;height:60%;background:radial-gradient(circle,rgba(180,83,9,0.04) 0%,transparent 65%);pointer-events:none;z-index:0}
+a{color:inherit;text-decoration:none}
+
+.topbar{position:sticky;top:0;z-index:100;background:rgba(8,8,0,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Syne,sans-serif;font-weight:800;font-size:16px;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-icon{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#b45309);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;-webkit-text-fill-color:#080800}
+.topbar-link{font-size:13px;color:var(--text2);padding:7px 14px;border-radius:100px;border:1px solid var(--border);transition:all .2s}
+.topbar-link:hover{color:var(--gold2);border-color:var(--border2);background:var(--surface)}
+
+.shell{display:flex;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.sidenav{width:230px;flex-shrink:0;padding:40px 16px 60px;position:sticky;top:69px;height:calc(100vh - 69px);overflow-y:auto}
+.sidenav-label{font-family:"Space Mono",monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 8px}
+.sidenav a{display:block;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--text2);font-weight:500;margin-bottom:2px;transition:all .15s;border-left:2px solid transparent}
+.sidenav a:hover{background:var(--surface);color:var(--gold2)}
+.sidenav a.active{background:rgba(251,191,36,0.1);color:var(--gold2);border-left-color:var(--gold);font-weight:700}
+main{flex:1;padding:48px 40px 100px;min-width:0;max-width:780px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-family:"Space Mono",monospace;font-size:11px;color:var(--gold2);letter-spacing:.5px;margin-bottom:18px}
+h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;background:linear-gradient(135deg,var(--gold4),var(--gold),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.lede{font-size:16px;color:var(--text2);max-width:620px;margin-bottom:8px;line-height:1.7}
+.updated{font-family:"Space Mono",monospace;font-size:11px;color:var(--text3);margin-bottom:36px}
+
+h2{font-family:Syne,sans-serif;font-weight:700;font-size:20px;color:var(--gold3);margin:36px 0 14px}
+h2:first-of-type{margin-top:0}
+p{font-size:14px;color:var(--text2);margin-bottom:14px;max-width:680px}
+
+table.dt{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px;max-width:680px}
+table.dt th{text-align:left;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--border2);color:var(--text3);font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase}
+table.dt td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+table.dt tr:last-child td{border-bottom:none}
+
+.num-list{display:flex;flex-direction:column;gap:10px;margin:16px 0;max-width:680px}
+.num-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px}
+.num-badge{width:24px;height:24px;border-radius:50%;background:rgba(251,191,36,0.12);border:1px solid var(--border2);color:var(--gold2);font-family:"Space Mono",monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.num-text{font-size:13px;color:var(--text2);line-height:1.6}
+.num-text strong{color:var(--gold4)}
+
+.callout{background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:var(--r-sm);padding:18px 20px;margin:20px 0;max-width:680px}
+.callout-title{font-weight:700;font-size:13px;color:var(--gold2);margin-bottom:6px}
+
+footer{border-top:1px solid var(--border);padding:30px 40px;text-align:center;font-size:12px;color:var(--text3);font-family:"Space Mono",monospace}
+
+@media(max-width:768px){
+  .sidenav{display:none}
+  main{padding:32px 20px 80px}
+  table.dt{font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="docs.html" class="brand"><span class="brand-icon">✦</span> Apollo AI Studio</a>
+  <a href="https://apollo-ai-ochre.vercel.app" class="topbar-link">Buka App →</a>
+</div>
+
+<div class="shell">
+  <nav class="sidenav">
+    <div class="sidenav-label">Dokumentasi</div>
+    <a href="docs.html">Docs</a>
+    <a href="faq.html">FAQ</a>
+    <a href="model-card.html">Model Card</a>
+    <div class="sidenav-label" style="margin-top:20px">Legal & Kebijakan</div>
+    <a href="ai-policy.html">AI Policy</a>
+    <a href="privacy-policy.html" class="active">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+  </nav>
+
+  <main>
+    <span class="eyebrow">🔒 Kebijakan Privasi</span>
+    <h1>Privacy Policy</h1>
+    <p class="lede">Bagaimana Apollo AI Studio mengumpulkan, menggunakan, dan melindungi data kamu.</p>
+    <div class="updated">Berlaku efektif: 2026 · Versi 1.0</div>
+
+    <h2>1. Data yang Kami Kumpulkan</h2>
+    <table class="dt">
+      <tr><th>Jenis Data</th><th>Contoh</th></tr>
+      <tr><td>Data akun</td><td>Email, nama, password (terenkripsi), foto profil (opsional)</td></tr>
+      <tr><td>Data percakapan</td><td>Pesan chat dengan AI, riwayat sesi, mode yang digunakan</td></tr>
+      <tr><td>Data Global Chat</td><td>Pesan yang kamu kirim di ruang chat publik (bersifat terlihat pengguna lain)</td></tr>
+      <tr><td>File yang diunggah</td><td>Foto dan dokumen PDF yang kamu kirim untuk dianalisis AI</td></tr>
+      <tr><td>Data teknis</td><td>Alamat IP, jenis perangkat, log aktivitas untuk keamanan</td></tr>
+    </table>
+
+    <h2>2. Bagaimana Data Digunakan</h2>
+    <div class="num-list">
+      <div class="num-item">
+        <span class="num-badge">1</span>
+        <span class="num-text">Menyediakan layanan inti: memproses chat, menyimpan riwayat, dan menjalankan fitur Global Chat.</span>
+      </div>
+      <div class="num-item">
+        <span class="num-badge">2</span>
+        <span class="num-text">Keamanan dan moderasi — mendeteksi penyalahgunaan, spam, atau pelanggaran kebijakan di Global Chat.</span>
+      </div>
+      <div class="num-item">
+        <span class="num-badge">3</span>
+        <span class="num-text">Peningkatan layanan — memahami pola penggunaan umum untuk memperbaiki fitur (tanpa menjual data ke pihak ketiga).</span>
+      </div>
+      <div class="num-item">
+        <span class="num-badge">4</span>
+        <span class="num-text">Notifikasi dan pengumuman terkait layanan, seperti update fitur atau pemberitahuan penting.</span>
+      </div>
+    </div>
+
+    <h2>3. Penyimpanan & Keamanan</h2>
+    <p>Data kamu disimpan menggunakan infrastruktur cloud dengan praktik keamanan standar industri, termasuk enkripsi password dan kontrol akses terbatas. Tim Apollo AI menerapkan sistem monitor dan log aktivitas 24/7 untuk mendeteksi aktivitas yang tidak sah.</p>
+    <p>Meski demikian, tidak ada sistem yang 100% bebas risiko. Kami menyarankan kamu untuk tidak membagikan informasi sangat sensitif (seperti data finansial pribadi) melalui chat dengan AI.</p>
+
+    <h2>4. Berbagi Data dengan Pihak Ketiga</h2>
+    <p>Apollo AI <strong style="color:var(--gold4)">tidak menjual</strong> data pribadi penggunanya. Data hanya dibagikan kepada penyedia infrastruktur teknis (seperti layanan hosting dan inferensi AI) yang diperlukan untuk menjalankan layanan, dan hanya sebatas yang diperlukan untuk fungsi tersebut.</p>
+
+    <h2>5. Data di Global Chat</h2>
+    <p>Pesan yang kamu kirim di Global Chat bersifat publik dan dapat dilihat oleh pengguna lain. Hindari membagikan informasi pribadi sensitif (nomor telepon, alamat, dll) di ruang ini. Tim Apollo AI dapat menghapus pesan atau membatasi akun yang melanggar kebijakan komunitas.</p>
+
+    <h2>6. Hak Pengguna</h2>
+    <p>Kamu memiliki hak untuk mengakses, mengubah, atau menghapus data akun melalui menu Profil di aplikasi. Untuk permintaan penghapusan akun secara permanen beserta seluruh riwayat data, hubungi tim kami melalui fitur Live Chat.</p>
+
+    <h2>7. Anak di Bawah Umur</h2>
+    <p>Apollo AI tidak secara khusus ditujukan untuk anak di bawah umur tanpa pengawasan orang tua/wali. Kami menerapkan kebijakan ketat terhadap konten yang membahayakan anak — lihat <a href="ai-policy.html" style="color:var(--gold2);text-decoration:underline">AI Policy</a> untuk detail.</p>
+
+    <h2>8. Perubahan Kebijakan</h2>
+    <p>Kebijakan privasi ini dapat diperbarui dari waktu ke waktu. Perubahan signifikan akan diberitahukan melalui notifikasi di dalam aplikasi atau pengumuman resmi.</p>
+
+    <div class="callout">
+      <div class="callout-title">📩 Pertanyaan soal Privasi?</div>
+      <p style="margin:0">Hubungi tim kami melalui fitur Live Chat di dalam aplikasi untuk pertanyaan terkait data pribadimu.</p>
+    </div>
+  </main>
+</div>
+
+<footer>© 2026 Apollo AI Studio — Made in Indonesia 🇮🇩 · v3.8.6.2</footer>
+</body>
+</html>
